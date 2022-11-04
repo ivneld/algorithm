@@ -37,7 +37,7 @@ void insertItem(NODE** map, int k){
     int i = 0;
 
     while (i < M) {
-        int b = getNextBucket(v, i);
+        int b = getNextBucket(k, i);
         if(map[b] ->next == NULL) {
             NODE *new = getNode();
             new->key = k;
@@ -60,7 +60,16 @@ void findElement(NODE** map, int k){
     }
     printf("-1\n");
 }
+void print(NODE** map){
 
+    for (int i = 0; i < M; i++) {
+        if(map[i]->next != NULL)
+            printf(" %d", map[i]->next->key);
+        else
+            printf(" 0");
+    }
+    puts("");
+}
 int main() {
     int n;
     scanf("%d %d %d", &M, &n, &q);
@@ -81,7 +90,11 @@ int main() {
                 scanf("%d", &x);
                 findElement(hashMap, x);
                 break;
+            case 'p':
+                print(hashMap);
+                break;
             case 'e':
+                print(hashMap);
                 return -1;
             default:
                 break;
