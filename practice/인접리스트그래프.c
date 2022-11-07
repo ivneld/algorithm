@@ -15,9 +15,9 @@ typedef struct GraphType{
 
 void init(GraphType* g){
     int v;
-    g->n=0;
-    for(v=0;v<MAX_VERTICES;v++)
-        g->adj_list[v]=NULL;
+    g->n = 0;
+    for (v = 0; v < MAX_VERTICES; v++)
+        g->adj_list[v] = NULL;
 }
 
 void insert_vertex(GraphType* g,int v){
@@ -34,7 +34,7 @@ void insert_edge(GraphType* g,int u,int v){
         fprintf(stderr,"vertex index error");
         return;
     }
-    node= (GraphNode*)malloc(sizeof(GraphNode));
+    node = (GraphNode *) malloc(sizeof(GraphNode));
     node->vertex=v;
     node->link=g->adj_list[u];
     g->adj_list[u]=node;
@@ -56,9 +56,12 @@ int main()
 {
     GraphType *g;
     g=(GraphType*)malloc(sizeof(GraphType));
+
     init(g);
+
     for(int i=0;i<4;i++)
         insert_vertex(g,i);
+
     insert_edge(g,0,1);
     insert_edge(g,1,0);
     insert_edge(g,0,2);
