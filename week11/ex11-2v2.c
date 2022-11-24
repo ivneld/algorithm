@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 //queue 구현용 전역변수들
 #define MAXSIZE 100000
 int front = -1, rear = -1;
