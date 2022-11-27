@@ -32,7 +32,7 @@ int airtelDC(int s, int d){
 int airtelDP(int s, int n){
     int *m = (int *) malloc(sizeof(int) * (n+1));   // 도착지점 n 까지 가는데 각 지점 마다의 최소 비용을 저장할 배열
     m[s] = 0;   // 시작지점 s 부터의 값만 계산하면 되므로 s번째 배열의 값을 0
-                // 재귀 호출 함수의 s == d 부분과 같은 의미
+    // 재귀 호출 함수의 s == d 부분과 같은 의미
 
     for (int d = s + 1; d <= n; d++) {
         m[d] = BIG_INT;
