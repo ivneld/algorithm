@@ -202,7 +202,6 @@ void replaceKey(Queue *queue, Vertex* z, int d){
         }
         cur = cur->next;
     }
-    puts("replace error");
 }
 
 int isContain(Queue *queue, Vertex* vertex){
@@ -215,20 +214,10 @@ int isContain(Queue *queue, Vertex* vertex){
     return 0;
 }
 
-Incidence *getIncidence(Vertex* u, Vertex* v){
-    Incidence *cur = u->head;
-    while (cur->next != NULL) {
-        cur = cur->next;
-        if((cur->edge->u == u && cur->edge->v == v) || (cur->edge->u == v && cur->edge->v == u))
-            return cur;
-    }
-    puts("getIncidence error");
-    return NULL;
-}
 
 int* Prim_JarnikMST(Graph* graph){
-    int *result = (int *) malloc(sizeof(int) * n);
-    int rIdx = 0;
+    int *list = (int *) malloc(sizeof(int) * n);
+    int idx = 0;
 
     for (int i = 0; i < n; i++) {
         dest[i] = BIG_INT;
@@ -236,32 +225,34 @@ int* Prim_JarnikMST(Graph* graph){
     }
 
     dest[0] = 0;
-    result[rIdx++] = 1;
-
+    list[idx++] = 1;
     Queue *queue = initQueue();
+
     for (int i = 0; i < n; i++) {
         enqueue(queue, graph->verList[i]);
     }
 
     while (!isEmpty(queue)) {
         Vertex *u = removeMin(queue);
+        int x = u->data;
 
-        Incidence *cur = u->head;
-        while (cur->next != NULL) {
-            cur = cur->next;
-            Vertex *z = oppositeVertex(u, cur->edge);
+        Incidence *e = u->head->next;
+        while (e != NULL) {
+            Vertex *z = oppositeVertex(u, e->edge);
 
-            if (isContain(queue, z) && cur->edge->weight < dest[z->data - 1]) {
-                dest[z->data - 1] = cur->edge->weight;
-                parent[z->data - 1] = cur;
-                replaceKey(queue, z, cur->edge->weight);
-                result[rIdx++] = z->data;
+            int w = e->edge->weight;
+            int data = dest[z->data - 1];
+
+            if (e->edge->weight < dest[z->data - 1]) {
+                dest[z->data - 1] = e->edge->weight;
+                replaceKey(queue, z, e->edge->weight);
+                list[idx++] = z->data;
             }
+            e = e->next;
         }
-        printf("%d ", u->data);
     }
 
-    return result;
+    return list;
 }
 
 int main(){
@@ -269,10 +260,13 @@ int main(){
 
     int *list = Prim_JarnikMST(graph);
 
-    /*for (int i = 0; i < n; i++) {
-        printf(" %d", list[i]);
-    }*/
+    int sum = 0;
 
+    for (int i = 0; i < n; i++) {
+        printf(" %d", list[i]);
+        sum += dest[i];
+    }
+    printf("\n%d", sum);
 
     return 0;
 }

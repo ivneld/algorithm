@@ -4,7 +4,6 @@
 typedef struct arrGraph {
     int **arr;
     int *label;
-<<<<<<< HEAD
     int verNum;
 } ArrGraph;
 
