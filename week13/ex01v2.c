@@ -133,7 +133,7 @@ int isContain(Queue *queue, int u){
     }
 }*/
 void PrimJarnikMST(ArrGraph *graph){
-    int MST[n];
+    int *MST = (int *) malloc(sizeof(int) * n);
     int idx = 0;
 
     Queue *queue = buildQueue(graph);
@@ -165,6 +165,15 @@ int main() {
     for (int i = 0; i < n; i++)
         sum += graph->dest[i];
     printf("%d", sum);
+
+    puts("");
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            printf("%d ", graph->arr[i][j]);
+        puts("");
+    }
+
     return 0;
 }
 
