@@ -37,6 +37,7 @@ ArrayGraph *buildGraph(){
 
     ArrayGraph *graph = initGraph();
 
+
     int u, v, w;
     for (int i = 0; i < m; i++) {
         scanf("%d %d %d", &u, &v, &w);
